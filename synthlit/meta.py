@@ -64,6 +64,80 @@ def subgroup_test(d, v, groups) -> dict:
     return {"levels": sub, "Q_between": qb, "df": df, "p": float(stats.chi2.sf(qb, df))}
 
 
+def meta_regression_multi(d, v, X, test_cols) -> dict | None:
+    """Mixed-effects meta-regression on design matrix X (intercept included),
+    method-of-moments residual tau^2 as in `meta_regression`, with a Wald
+    chi-square test that the coefficients in `test_cols` are all zero.
+    Returns None when the model has no residual degrees of freedom."""
+    d = np.asarray(d, float); v = np.asarray(v, float); X = np.asarray(X, float)
+    k, p = X.shape
+    if k <= p or not test_cols:
+        return None
+    W = np.diag(1.0 / v)
+    XtWX_inv = np.linalg.inv(X.T @ W @ X)
+    resid = d - X @ (XtWX_inv @ X.T @ W @ d)
+    q = float(resid @ W @ resid)
+    P = W - W @ X @ XtWX_inv @ X.T @ W
+    tau2 = max(0.0, (q - (k - p)) / np.trace(P))
+    Ws = np.diag(1.0 / (v + tau2))
+    cov = np.linalg.inv(X.T @ Ws @ X)
+    beta = cov @ X.T @ Ws @ d
+    s = list(test_cols)
+    b = beta[s]
+    qm = float(b @ np.linalg.solve(cov[np.ix_(s, s)], b))
+    return {"Q_M": qm, "df": len(s), "p": float(stats.chi2.sf(qm, len(s))), "tau2_resid": float(tau2),
+            "beta": [float(x) for x in beta]}
+
+
+def _add_columns(X: list, cols: list) -> list[int]:
+    """Append each column to X if it is not collinear with what is there; return the kept indices."""
+    kept = []
+    for c in cols:
+        trial = np.column_stack(X + [c])
+        if np.linalg.matrix_rank(trial) > len(X):
+            X.append(c); kept.append(len(X) - 1)
+    return kept
+
+
+def _dummies(groups) -> list:
+    groups = np.asarray(groups)
+    levels = sorted(set(groups.tolist()), key=lambda g: (-int((groups == g).sum()), str(g)))
+    return [(groups == g).astype(float) for g in levels[1:]]  # most common level is the reference
+
+
+def categorical_test(d, v, groups, covariates=()) -> float | None:
+    """p for a categorical moderator (dummy-coded) in a mixed-effects meta-regression,
+    optionally adjusting for other covariate columns. None if the moderator can't be tested."""
+    d = np.asarray(d, float)
+    X = [np.ones_like(d)]
+    _add_columns(X, [np.asarray(c, float) for c in covariates])
+    test = _add_columns(X, _dummies(groups))
+    r = meta_regression_multi(d, v, np.column_stack(X), test)
+    return None if r is None else r["p"]
+
+
+def continuous_test(d, v, x, covariates=()) -> float | None:
+    """p for a continuous moderator in a mixed-effects meta-regression, optionally adjusted."""
+    d = np.asarray(d, float)
+    X = [np.ones_like(d)]
+    _add_columns(X, [np.asarray(c, float) for c in covariates])
+    test = _add_columns(X, [np.asarray(x, float)])
+    r = meta_regression_multi(d, v, np.column_stack(X), test)
+    return None if r is None else r["p"]
+
+
+def egger_test(d, v) -> dict:
+    """Classic Egger regression test for funnel asymmetry: OLS of d/se on 1/se; tests the intercept."""
+    d = np.asarray(d, float); se = np.sqrt(np.asarray(v, float))
+    y = d / se; X = np.column_stack([np.ones_like(se), 1.0 / se])
+    beta, *_ = np.linalg.lstsq(X, y, rcond=None)
+    k = len(d); dof = k - 2
+    s2 = float(np.sum((y - X @ beta) ** 2) / dof)
+    se_b0 = float(np.sqrt(s2 * np.linalg.inv(X.T @ X)[0, 0]))
+    t = float(beta[0] / se_b0)
+    return {"intercept": float(beta[0]), "se": se_b0, "t": t, "df": dof, "p": float(2 * stats.t.sf(abs(t), dof))}
+
+
 def meta_regression(d, v, x) -> dict:
     """Single continuous moderator; method-of-moments residual tau^2."""
     d = np.asarray(d, float); v = np.asarray(v, float); x = np.asarray(x, float)
