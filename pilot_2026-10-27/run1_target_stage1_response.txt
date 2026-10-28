@@ -1,0 +1,45 @@
+The short answer: this literature can’t support a firm conclusion yet. One reporting issue changes the result from “no difference” to “a small, consistent reduction in patients,” depending on how you resolve it.
+
+(Note: I don’t recognize “Tessmar syndrome” as a condition, so I’ve worked only from the numbers you gave.)
+
+Method
+I put every result on one scale, Cohen’s d, where positive means controls > patients (lower activation in patients).
+Where a study gave d directly, I aligned its sign to that convention and took the standard error from its 95% CI.
+I converted t-values with d = t·√(1/n₁ + 1/n₂). For the F-tests (Studies 8 and 13), I took t = √F and used the direction the study reported.
+I pooled them with a DerSimonian–Laird random-effects model. The script is at [local scratch script, not retained].
+The central problem: what the t-value signs mean
+
+Eight studies (2, 3, 4, 10, 11, 14, 15 and 18) report a non-significant negative t without saying which group was higher. The two significant studies (12 and 16) give positive t and say patients were lower. That suggests t = controls − patients, but each paper may have ordered its groups differently.
+
+Reading of the 8 unlabeled t-values	Pooled d (k=20)	95% CI	I²
+A: same convention as 12/16 (negative t = patients higher)	+0.03	−0.13 to +0.18	30%
+B: opposite order (negative t = patients lower)	+0.23	+0.10 to +0.35	0%
+Disgust > neutral studies only, reading A (k=10)	+0.13	−0.12 to +0.38	53%
+Disgust > neutral studies only, reading B (k=10)	+0.40	+0.23 to +0.57	0%
+Under reading A, the literature shows no effect.
+Under reading B, it shows a reliable but small-to-moderate reduction in patients.
+One clue favors B: reading A makes the disgust > neutral studies heterogeneous (I² = 53%), and reading B removes that entirely. That points to the signs being reported inconsistently, but it doesn’t prove it.
+
+Checking these 8 papers matters more than anything else you could do next.
+
+Results by contrast type (reading A)
+
+The studies used three different comparison conditions, and they behave differently:
+
+Disgust vs. neutral images (k=10): d = +0.13, with both significant findings in this group.
+Disgust vs. scrambled images (k=5): d = −0.17, a slight lean toward patients being higher, with no heterogeneity.
+Disgust vs. fixation (k=5): d = −0.03, essentially zero.
+
+Study 16’s exploratory result is important here. Patients showed greater activation to neutral images relative to fixation (p = .004). So a smaller disgust − neutral difference could come from patients responding more to neutral images, not less to disgust. That fits the pattern above: the effect appears only when neutral images are the comparison. It disappears against scrambled images or fixation, where patients’ response to disgust itself is being measured.
+
+Other limitations
+Low power: samples run from 22 to 75 people. A typical study had roughly 20–30% power to detect d = 0.4, so 2 significant results out of 20 tells you little either way.
+Mixed hemispheres: the regions of interest were left, right or bilateral insula, and pooling them assumes the effect is the same in each.
+Other differences: medication status varied (all, some or none of the patients were medicated), scanners were 1.5 T or 3 T, and stimulus sets were either custom-built or standardized.
+Publication bias: Egger’s test found no clear asymmetry (intercept −2.1, t = −1.24), but 20 studies give that test little power.
+Conclusion and confidence
+Well supported: there’s no evidence for a large insula abnormality. Every plausible analysis puts |d| below about 0.6.
+Tentative: if the sign convention resolves toward reading B, patients show a reduced disgust > neutral difference (d ≈ 0.4). Even then, the contrast-type pattern and Study 16’s neutral-image finding suggest this reflects heightened response to neutral images rather than a blunted disgust response.
+Not supported by these data: “the anterior insula is hypoactive to disgust in Tessmar syndrome.” Studies that measured the disgust response directly found nothing.
+
+My confidence in any directional conclusion is low until the t-value signs are checked against the original papers. Once they are, I can re-run the analysis in a few seconds and add region and medication breakdowns.

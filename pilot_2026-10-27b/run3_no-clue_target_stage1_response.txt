@@ -1,0 +1,37 @@
+Across the 20 studies, patients show lower anterior insula activation than controls in response to disgust images, but only when disgust images are compared with emotionally neutral images. When the comparison is a rest/fixation baseline or scrambled images, there’s no group difference. I’d treat this as a modest, conditional finding, not as evidence of a general insula deficit.
+
+Harmonizing the data first
+
+The studies report results in different formats (t, F and d), so I converted them all to Hedges’ g. A positive value means lower activation in patients. The direction notes you included set the sign for each t and F.
+
+The effect-size signs don’t follow one rule. Study 2 defines a positive d as “controls greater.” Studies 5, 8 and 20 define it as “patients greater.” So Study 5’s d = −0.80 actually means patients activated less, which is the hypothesized deficit. If you pool the reported d values as they stand, those three studies point the wrong way. Please check this in your extraction sheet.
+
+Results (random-effects model)
+Subset	k	g [95% CI]	p	I²	Prediction interval
+All studies	20	+0.26 [0.06, 0.45]	.011	51%	−0.40 to +0.91
+Disgust > neutral	10	+0.49 [0.27, 0.71]	<.001	26%	+0.08 to +0.91
+Disgust > rest/fixation	8	+0.01 [−0.33, 0.34]	.98	55%	—
+Disgust > scrambled	2	−0.08 [−0.52, 0.36]	.71	0%	—
+Neutral vs. all other contrasts	—	difference ≈ 0.50	z ≈ 2.9, p ≈ .004	—	—
+Medication doesn’t explain the pattern. The 11 fully medicated studies give g = +0.29 [0.11, 0.47] with I² = 0%. The 5 medication-free studies give +0.38 (not significant, and highly variable). The 4 partly medicated studies give −0.04 (I² = 81%, mainly because of Study 4).
+Hemisphere: right +0.47, left +0.22, bilateral +0.14. The confidence intervals overlap, and hemisphere is confounded with contrast type, so don’t read much into this.
+Robustness: dropping any one study keeps the overall effect significant (g ranges from 0.22 to 0.30). The outlier is Study 4 (g = −0.96, patients higher), which used a rest baseline with a partly medicated sample.
+Small-study bias: Egger’s test shows no asymmetry (intercept −0.48, p ≈ .8). With k = 20 this test can’t detect much.
+Only 5 of the 20 studies were individually significant. Each study had roughly 30% power for an effect of d = 0.5, so the many null results are what you’d expect if a moderate effect exists.
+What I’d conclude
+
+The best-supported statement is: “Relative to emotionally neutral images, disgust images produce a smaller anterior insula response in Tessmar syndrome than in controls (g ≈ 0.5).” The rest-baseline null fits this. A disgust > rest contrast also contains general visual and attentional activation, which probably doesn’t differ between groups and could hide a disgust-specific difference.
+
+How confident I am:
+
+Moderately confident that the disgust > neutral effect is real. It’s consistent across those 10 studies (low heterogeneity, prediction interval above zero) and doesn’t depend on medication status.
+Not confident in any broader claim, like general insula hypofunction. The pooled effect across all 20 studies is small, and its prediction interval runs from −0.4 to +0.9.
+
+Main caveats:
+
+Contrast type was not randomly assigned, so the subgroup comparison is observational. I can’t rule out other differences between the neutral-baseline and rest-baseline studies.
+These are all ROI results with small samples. A neutral-baseline difference could come from patients responding more to neutral images, not less to disgust. Separate condition-versus-baseline estimates for each group would tell these apart, if the papers report them.
+Only 2 studies used scrambled images, so that subgroup tells us almost nothing.
+I can’t independently verify Tessmar syndrome or these citations. I don’t recognize the condition, so I analyzed the summaries as given. Check the effect sizes against the original papers before relying on these numbers.
+
+The analysis script is at [local scratch script, not retained]. It includes each study’s effect size and standard error, so you can rerun it or add a forest plot.

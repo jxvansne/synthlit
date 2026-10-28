@@ -1,0 +1,57 @@
+Pooled, these 20 studies point to a small reduction in anterior insula response to disgust in Tessmar syndrome (Hedges’ g ≈ 0.30). Several features of the data cap how confident I can be. The biggest one: whether the effect exists at all depends on a sign convention the summaries don’t state.
+
+What I did
+
+I converted every result to Hedges’ g, with positive meaning controls > patients:
+
+t-tests: d = t·√(1/n₁+1/n₂).
+F-tests: t = √F, with the direction taken from the text.
+Reported d values: used as given, except I flipped Studies 9, 17 and 20, whose stated convention is the reverse (“positive = patients greater”).
+
+I then ran a random-effects meta-analysis (DerSimonian–Laird), subgroup analyses, and Egger’s test for small-study bias.
+
+Results
+Analysis	k	g [95% CI]	p	I²
+All studies	20	0.30 [0.18, 0.43]	<.0001	0%
+Disgust vs neutral	10	0.30 [0.13, 0.47]	.0007	0%
+Disgust vs scrambled	5	0.25 [0.00, 0.50]	.048	0%
+Disgust vs fixation	5	0.40 [0.10, 0.69]	.008	0%
+Disgust-specific contrasts only (neutral + scrambled)	15	0.28 [0.14, 0.42]	.0001	0%
+Medication-free patients	7	0.23 [0.01, 0.44]	.04	0%
+Medicated patients	8	0.37 [0.15, 0.58]	.0008	0%
+Studies whose direction is explicit	9	0.27 [0.08, 0.45]	.005	0%
+Only 1 of the 20 studies (Study 2) was significant on its own. That fits the sample sizes: with about 25 per group, each study had roughly 15–20% power to detect d = 0.3. The literature reads as “mostly null” because the studies are underpowered, not because the effect is absent.
+Egger’s test shows no small-study asymmetry (intercept ≈ −0.24, p ≈ .8).
+Subgroups don’t differ meaningfully. Contrast type, medication status and hemisphere all give overlapping estimates. Medicated samples trend slightly larger, but these comparisons have very little power.
+Why my confidence is only moderate
+
+1. The sign of the t-values is unclear, and the conclusion depends on it. Eleven studies report a negative t, say only “not significant,” and give no direction. Study 2 reports a positive t alongside “patients lower.”
+
+If negative t means patients < controls (patients − controls, the usual order when patients are listed first): g = 0.30 (the table above).
+If the t’s all follow Study 2’s convention (negative = patients higher): the pooled effect drops to g = −0.06 [−0.21, 0.10], p = .46, a null.
+
+The first reading is more plausible. Every study with an explicit direction except Study 17 favours controls. All 11 unlabeled t’s being negative would be odd if they meant the opposite. The 9 explicitly signed studies alone still give g = 0.27, p = .005. Even so, you need to check the direction in the original papers before relying on this.
+
+2. The studies agree more than chance allows. Q = 6.28 on 19 df is less spread than sampling error alone should produce (p ≈ .003 for a value that low). Genuinely independent studies with n ≈ 25 per group should scatter more. Possible explanations:
+
+overlapping samples across papers;
+selective reporting or harmonised analyses;
+summaries that have been processed or don’t come straight from the primary sources.
+
+I’d look into this before publishing. It also means “I² = 0%” shouldn’t be read as reassuring.
+
+3. The contrasts measure different things. Five studies compare disgust with fixation, which picks up general visual and emotional reactivity, not disgust specifically. Restricting to disgust-specific contrasts barely changes the estimate (0.28). Study 16’s neutral-vs-fixation null is weak evidence against a general hypoactivation. Still, a “disgust-specific” interpretation rests mainly on 15 studies.
+
+4. Other caveats:
+
+The regions of interest are left, right or bilateral. I pooled them, as most meta-analyses do, but they aren’t the same measure.
+Medication is confounded with study in 13 of the 20.
+All evidence is from region-of-interest analyses, so this says nothing about whole-brain specificity.
+I can’t independently verify “Tessmar syndrome” or these citations. I worked only from your summaries.
+Conclusion
+
+If the sign convention holds, the evidence supports a small, fairly consistent reduction in anterior insula response to disgust images in Tessmar syndrome (g ≈ 0.3, 95% CI roughly 0.15–0.45). It appears in disgust-specific contrasts and in medication-free samples, so it isn’t explained by baseline choice or medication alone.
+
+I’d call my confidence moderate on the direction and low-to-moderate on the size. It would rise with confirmation of the t-value directions, an explanation for the unusually low heterogeneity, and checks for sample overlap. The individually null studies shouldn’t be read as evidence of no difference. The field’s real problem is power, and a single adequately powered study (about 175 per group for 80% power at d = 0.3) would settle the question better than more studies at n = 25.
+
+The analysis script is at [local scratch script, not retained]. Once you’ve checked the sign conventions, I can re-run it, add a forest plot, or draft the results section.

@@ -1,0 +1,43 @@
+Patients with Tessmar syndrome show slightly lower anterior insula activation to disgust images than controls. The pooled effect is small and fragile, and it is driven mostly by six studies that share one specific design. I’d describe the evidence as weak and inconsistent, not as an established insula deficit.
+
+Getting the 20 results onto one scale
+Opposite sign conventions. The six studies that report d don’t agree on what a positive value means. Studies 1 and 6 use positive = patients higher; studies 8, 10, 15 and 17 use positive = controls higher. Pooling them as printed would flip four of the six. I put everything on one scale: negative = patients lower than controls.
+Converting t and F. For t-tests I used d = t·√(1/n₁+1/n₂), taking the direction from the text. For a two-group F I used t = √F. All values were then corrected to Hedges’ g.
+Not like-for-like measures. The studies don’t all measure the same thing. There are three different comparison conditions (neutral pictures, a fixation cross, or scrambled images), three insula regions (left, right, both sides), and different medication status.
+Overall result (random-effects model, k = 20, n = 893)
+	g	95% CI	Notes
+All studies	−0.24	−0.45 to −0.03	p = .024; I² = 60%; τ = 0.37; prediction interval −1.01 to +0.53
+Fragile: dropping any one of studies 6, 7 or 11 alone pushes p above .05.
+Wide prediction interval: a new study could plausibly find a moderate effect in either direction.
+No sign of small-study bias (Egger’s test p ≈ .36), but with 20 small studies that test has little power.
+What explains the inconsistency
+Subgroup	k	g	95% CI
+Disgust vs neutral pictures	10	−0.51	−0.80 to −0.22
+Disgust vs fixation cross	9	−0.05	−0.28 to +0.19
+Left insula	10	−0.47	−0.78 to −0.16
+Right insula	8	+0.08	−0.15 to +0.31
+Left insula, vs neutral	6	−0.73	−1.08 to −0.39
+Left insula, vs fixation	4	−0.08	−0.43 to +0.27
+Right insula, vs neutral	3	−0.04	−0.34 to +0.26
+
+Medication status, scanner strength (1.5 T vs 3 T) and stimulus set did not explain the differences; all those subgroups sit near −0.2 to −0.3.
+
+Why the fixation comparison matters: Study 4 reports that patients respond more than controls to neutral pictures compared with fixation (p = .003). If that holds generally, comparing disgust with fixation inflates the patients’ responses and can hide a disgust-specific deficit. That makes the neutral-picture comparison the better test of disgust processing.
+
+Why left vs right may matter: The left/right split also holds up within the neutral-picture studies. That could be real, or chance in a small subgroup.
+
+My conclusion and how confident I am
+
+There is moderate-to-low confidence in a modest reduction of left anterior insula responses to disgust in Tessmar syndrome. The reduction shows up when disgust pictures are compared with neutral pictures (g ≈ −0.7, 6 studies). There is no good evidence for a general insula difference, or for any difference in the right insula.
+
+Reasons for caution:
+
+The subgroup findings are post hoc. I found them by exploring 20 studies, and the decisive subgroup has only 6. Treat them as hypotheses, not findings.
+Each study measured one region. No study reports both left and right insula. That raises the possibility that authors picked which side to report, which would bias the subgroup results.
+Samples are small (median about 45 per study). None of the studies could reliably detect an effect of g ≈ 0.3.
+Summary statistics only. I worked from reported t, F and d values, not raw data. Rounded p-values and ANOVA-to-t conversions add some error.
+I couldn’t verify the condition. I don’t recognize “Tessmar syndrome” as an established diagnosis, and I can’t check these citations from here. Please confirm the studies against the original papers before this goes into a review.
+
+What would settle it: a preregistered study that reports both left and right insula, compares disgust with both neutral pictures and fixation, and is large enough (roughly 100+ per group) to detect g ≈ 0.4.
+
+The analysis script is at [local scratch script, not retained].

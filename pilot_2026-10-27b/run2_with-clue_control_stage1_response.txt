@@ -1,0 +1,42 @@
+Bottom line
+
+Taken together, these 20 studies show a small-to-moderate reduction in anterior insula response to disgust images in Tessmar syndrome patients compared with controls: pooled Hedges’ g = −0.43, 95% CI −0.62 to −0.25, p < .001. I’m fairly confident the reduction is real in this set of studies. I’m much less confident about what it means for insula function.
+
+Most of the papers (12 of 20) report no significant group difference, so a count of significant results would suggest “mostly null.” That reading is wrong. Of the 12 non-significant studies, 9 point in the same direction (patients lower). They’re just underpowered: the average n is about 22 per group, which gives roughly 30% power for d ≈ 0.45.
+
+How I harmonized the data
+Sign conventions are mixed in your summaries. Studies 1 and 6 define positive d as patients > controls. Studies 8, 10, 15 and 17 define it as controls > patients. I recoded everything so that negative means patients are lower. Please check this when you build your extraction table: it’s the easiest error to make, and it changes the result. For example, Study 10’s “+0.89” is actually a patient deficit.
+t and F were converted to d using the group ns, with √F taken for the 1-df F tests. All values were then corrected to Hedges’ g and pooled with a DerSimonian–Laird random-effects model.
+For Study 4 I used the primary disgust contrast, not the exploratory neutral-vs-fixation test.
+Results
+Analysis	k	g [95% CI]	I²
+All studies	20	−0.43 [−0.62, −0.25]	48%
+Disgust > neutral	10	−0.51 [−0.80, −0.22]	57%
+Disgust > fixation	9	−0.43 [−0.67, −0.20]	30%
+Disgust > scrambled	1	+0.29 [−0.42, +1.00]	–
+Medication-free patients	5	−0.52 [−0.95, −0.09]	58%
+All patients medicated	10	−0.38 [−0.65, −0.12]	53%
+Left anterior insula ROI	10	−0.62 [−0.87, −0.37]	35%
+Right anterior insula ROI	8	−0.15 [−0.38, +0.09]	24%
+Bilateral ROI	2	−0.72 [−1.12, −0.31]	0%
+10 largest studies	10	−0.37 [−0.61, −0.13]	47%
+
+Sensitivity: dropping any single study leaves the pooled g between −0.40 and −0.47, so no one study drives the result. Field strength (1.5 T vs 3 T) and publication period make no difference. The 95% prediction interval is −1.03 to +0.17, so a new study could plausibly find anything from a large deficit to no difference.
+
+What I’d conclude, and with what confidence
+
+Moderate confidence: across published studies, Tessmar patients show reduced anterior insula activation to disgust images. The effect holds up when you leave out single studies, appears in medication-free samples (so medication probably doesn’t explain it), and appears with both neutral and fixation baselines.
+
+Low confidence about anything beyond that:
+
+Laterality. The left-ROI studies show a clear deficit; the right-ROI studies show essentially none. The difference between the two is about z ≈ 2.7. That’s interesting, but it’s a post-hoc split across different studies, not a within-study comparison. ROI side may also be linked to lab or analysis choices. I’d report it as a hypothesis to test, not a finding.
+Is the deficit specific to disgust? Nine studies used a fixation baseline, which mixes disgust processing with general visual and arousal responses. The disgust > neutral studies show the effect too, which helps. But the only study with the tightest control (phase-scrambled images, Study 3) points the other way, and no study compares disgust with other negative emotions. So “reduced insula response to disgust images” is supported, while “a disgust-specific insula deficit” isn’t yet.
+Publication bias and small-study effects. Egger’s test isn’t significant (intercept −3.1, t = −1.39). It points toward smaller studies showing bigger deficits, and with k = 20 the test is weak. The 10 largest studies give a slightly smaller estimate (−0.37), so the true effect may be somewhat below −0.43.
+Only ROI results. Every study reports an anatomically defined ROI, and we can’t tell whether other regions or contrasts were tested and not reported. Whole-brain or unreported analyses could bias the pooled estimate.
+No behavioral link. None of the summaries report disgust ratings. Lower insula activation could reflect a different subjective experience, not abnormal insula processing.
+
+Draft wording for the review: “Patients with Tessmar syndrome show a modest, consistent reduction in anterior insula responses to disgust-eliciting images (g ≈ −0.4). The effect may be concentrated in the left hemisphere, and whether it is specific to disgust remains untested.”
+
+One flag: I don’t recognize “Tessmar syndrome” as an established diagnosis, and I can’t check these 20 papers against the literature. Before relying on the numbers above, confirm the condition name and the extracted statistics against the original papers.
+
+The analysis script is at [local scratch script, not retained]. I can move it into your project folder, add a forest or funnel plot, or run a formal moderator meta-regression.

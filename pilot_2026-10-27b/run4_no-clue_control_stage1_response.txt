@@ -1,0 +1,44 @@
+Across the 20 studies, patients with Tessmar syndrome show lower anterior insula activation to disgust images than controls. The pooled effect is moderate: g = 0.44 (95% CI 0.27–0.61, p < .001), from 866 participants. I’m fairly confident the group difference is real for this kind of task. I’m much less confident that it reflects a disgust-specific insula problem.
+
+How I pooled the results
+Common scale. I converted every study to Hedges’ g. Positive values mean controls activated more than patients. I converted t to d with d = t·√(1/n₁+1/n₂), and F(1, df) via √F.
+Sign conventions don’t match. Study 2 counts positive as “controls greater,” but Studies 5, 8 and 20 count positive as “patients greater.” I flipped 5, 8 and 20. If you pooled the reported d values as written, those three strong hypoactivation findings would count as the opposite result. Please check this when you extract data.
+Model. I used a DerSimonian–Laird random-effects model.
+Results
+	k	g	95% CI	I²
+All studies	20	0.44	0.27 – 0.61	33%
+Disgust > neutral	10	0.49	0.28 – 0.71	26%
+Disgust > fixation	8	0.39	0.05 – 0.73	55%
+Disgust > scrambled	2	0.31	−0.13 – 0.75	0%
+Left insula ROI	7	0.42	0.18 – 0.67	0%
+Right insula ROI	6	0.60	0.25 – 0.96	50%
+Bilateral ROI	7	0.33	0.01 – 0.65	50%
+All patients medicated	11	0.52	0.34 – 0.70	0%
+Medication-free	5	0.51	0.05 – 0.97	60%
+Some patients medicated	4	0.16	−0.35 – 0.68	64%
+Heterogeneity: modest (Q = 28.4, df = 19, τ² = 0.05). The 95% prediction interval runs from about −0.05 to 0.94, so a new study could plausibly find anything from no difference to a large deficit.
+Leave-one-out: dropping any single study leaves the pooled g between 0.41 and 0.48, and every CI stays above zero.
+Small-study bias: Egger’s intercept was 0.47 (t = 0.28), so no sign of funnel asymmetry. With 20 small studies, though, this test has little power.
+Direction: 18 of 20 point estimates favour patient hypoactivation. The exceptions are Study 4 (g = −0.57) and Study 9 (g = −0.09), both mixed-medication samples using a fixation baseline.
+
+Counting significant results would mislead you here. Only 7 of the 20 studies are significant on their own; 13 are not. That pattern comes from low power: the median sample is about 20 per group, which gives roughly 30–35% power to detect d ≈ 0.45. Most of the “null” studies point the same way and fit the pooled effect well. Your review shouldn’t describe this literature as “mixed” just because of the p-values.
+
+What I’d conclude
+
+I’m moderately-to-highly confident that when patients with Tessmar syndrome view disgust images, their anterior insula responds less than controls’. The effect is about half a standard deviation and holds across scanners, stimulus sets, designs and hemispheres.
+
+My confidence is low to moderate that this shows a specific problem with disgust processing in the insula:
+
+No comparison with other emotions. None of the studies tests disgust against fear, sadness or general arousal. The data fit reduced insula reactivity to emotion in general, or to salience, just as well as a disgust-specific deficit.
+Weak baselines. Ten studies compare disgust with fixation or rest, which also picks up visual and attention differences. The tighter disgust-vs-neutral subgroup still shows the effect (g = 0.49), which helps. The best-controlled subgroup, disgust vs. phase-scrambled images, has only two studies and its CI crosses zero.
+Inconsistent choice of insula region. Each study reports one region (left, right or bilateral), and the choice varies with no obvious reason. If authors picked the region that gave the clearest result, the pooled effect would be inflated. Funnel-plot tests can’t detect this. If the papers report the other hemispheres, I’d extract them and use a multilevel model.
+Medication probably isn’t the explanation. The effect is as large in medication-free samples (0.51) as in fully medicated ones (0.52). The weaker mixed-medication subgroup has only four studies, so I wouldn’t read much into it.
+Missing behavioural data. The summaries don’t report participants’ disgust ratings, engagement, head motion or vascular confounds. Without them, you can’t tell whether patients’ brains responded differently or they just engaged less with the pictures.
+Small, older studies. Many are small, some used 1.5 T scanners, and the most recent is from 2016. Nobody has done a large, preregistered study yet.
+Suggested wording for the review
+
+“Studies consistently show modest anterior insula hypoactivation to disgust-eliciting images in Tessmar syndrome (g ≈ 0.45). Whether this reflects disgust-specific dysfunction, broader affective or salience hyporeactivity, or reduced task engagement remains untested.”
+
+One caveat: “Tessmar syndrome” isn’t a condition I recognise. I worked only from your summaries and can’t check them against the original papers. Before you publish the numbers, recheck each study’s group sizes, test statistics and sign conventions against the full text.
+
+The analysis script is at [local scratch script, not retained], if you want to rerun or extend it.
