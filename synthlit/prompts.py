@@ -12,7 +12,7 @@ PROMPT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file
 PASTE_MARKER = "[PASTE packet.md BELOW THIS LINE]"
 # Sent once, when a model's first reply only asks for information (CLAUDE.md, eval hygiene).
 CLARIFICATION_REPLY = "Please treat the summaries as given."
-# Sent once, when a model's first reply declines to do the synthesis (Jared, 2026-10-29). PROPOSED wording.
+# Sent once, when a model's first reply declines to do the synthesis (wording approved by Jared, 2026-10-29).
 PROCEED_REPLY = "Please treat the summaries as given and proceed with the synthesis."
 
 

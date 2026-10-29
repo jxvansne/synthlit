@@ -57,7 +57,7 @@ from .meta import (d_from_t, var_d, random_effects, subgroup_test, meta_regressi
 GENERATOR_VERSION = "0.5"
 DELTA_DEFAULT = 0.40
 TAU_DEFAULT = 0.25
-K_DEFAULT = 20          # PROVISIONAL: literature size is Jared's call (see tools/screen_stats.py)
+K_DEFAULT = 40          # Jared, 2026-10-29: 40 studies (close to the 35 in the source meta-analysis)
 NUISANCE_ALPHA = 0.05   # clean: no nuisance test reaches p < .05 (Jared, 2026-10-29)
 DISTRACTOR_ALPHA = 0.01  # a distractor must be clearly significant on its own
 BALANCE_ALPHA = 0.20     # a distractor must not be associated with contrast type
