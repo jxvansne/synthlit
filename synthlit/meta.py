@@ -105,6 +105,11 @@ def _dummies(groups) -> list:
     return [(groups == g).astype(float) for g in levels[1:]]  # most common level is the reference
 
 
+def moderator_columns(x, categorical: bool) -> list:
+    """Design-matrix columns for one moderator, to use as covariates in another test."""
+    return _dummies(x) if categorical else [np.asarray(x, float)]
+
+
 def categorical_test(d, v, groups, covariates=()) -> float | None:
     """p for a categorical moderator (dummy-coded) in a mixed-effects meta-regression,
     optionally adjusting for other covariate columns. None if the moderator can't be tested."""

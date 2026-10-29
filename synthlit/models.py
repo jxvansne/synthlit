@@ -25,7 +25,7 @@ BATCH_DISCOUNT = 0.5
 EFFORTS = ("low", "medium", "high", "xhigh", "max")
 # Planning guesses for output tokens (thinking + answer) per Stage 1 reply. Replace with
 # measured values from runs/*/ once a pilot exists (`harness status` prints them).
-OUTPUT_TOKENS_GUESS = {"low": 3000, "medium": 8000, "high": 16000, "xhigh": 28000, "max": 45000}
+OUTPUT_TOKENS_GUESS = {"low": 7000, "medium": 10000, "high": 18000, "xhigh": 30000, "max": 45000}  # Haiku 5.5 low wrote ~6-7k (2026-10-28)
 STAGE2_OUTPUT_TOKENS_GUESS = 1500
 
 
