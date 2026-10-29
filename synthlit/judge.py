@@ -29,6 +29,7 @@ from .providers import make_provider
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JUDGE_DEFAULT = "claude-opus-5-5@medium"
 JUDGE_MAX_TOKENS = 16000
+JUDGE_OUTPUT_TOKENS_GUESS = 2000   # for the cost pre-check; the first 9 pilot1 judgments used 700-1,500
 LEGACY_LOCUS_WEIGHT = 3
 
 SCHEMA = {
@@ -194,7 +195,7 @@ def judge_items(items: list[dict], judge: str, outdir: str, budget: float, mode:
         todo.append((it, path, text))
     if not todo:
         return {"judged": 0, "cost_usd": 0.0}
-    est = sum(cost_usd(s.model, len(t) / 3.2, 4000, batch=(mode == "batch")) for _, _, t in todo)
+    est = sum(cost_usd(s.model, len(t) / 3.2, JUDGE_OUTPUT_TOKENS_GUESS, batch=(mode == "batch")) for _, _, t in todo)
     if est > budget:
         raise SystemExit(f"estimated judge cost ${est:.2f} exceeds the budget ${budget:.2f}")
     os.makedirs(outdir, exist_ok=True)
@@ -225,6 +226,7 @@ def judge_items(items: list[dict], judge: str, outdir: str, budget: float, mode:
                "input_sha256": hashlib.sha256(text.encode()).hexdigest(), "status": rtype}
         if rtype == "succeeded":
             u = payload["usage"]
+            out["usage"] = {k: u.get(k) for k in ("input_tokens", "output_tokens")}
             out["cost_usd"] = cost_usd(s.model, u.get("input_tokens", 0), u.get("output_tokens", 0), batch=(mode == "batch"))
             spent += out["cost_usd"]
             try:
