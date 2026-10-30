@@ -156,6 +156,25 @@ class HarnessTest(unittest.TestCase):
         self.assertIn("(weight 3)", text)
         self.assertNotIn("fake-ideal", text)
 
+    def test_retry_truncated_sets_aside_and_reruns_with_larger_limit(self):
+        _, recs = self._run("retry1", ["fake-ideal@max"], "batch")
+        path = h.record_path("retry1", parse_subject("fake-ideal@max"), recs[("fake-ideal@max", "target", False, 1)]["packet_id"], 1)
+        rec = load_json(path); rec["status"] = "truncated"; h.write_json(path, rec)
+        n = h.retry_truncated("retry1", parse_subject("fake-ideal@max"), 300000)
+        self.assertEqual(n, 1)
+        new = load_json(path)
+        self.assertEqual((new["status"], new["max_tokens"], new["attempt"]), ("pending", 300000, 2))
+        self.assertTrue(os.path.exists(os.path.join(h.run_dir("retry1"), new["retry_of"]["record"])))
+        with contextlib.redirect_stdout(io.StringIO()):
+            h.run_batch("retry1", h.read_json(os.path.join(h.run_dir("retry1"), "plan.json")), h.Budget(None, 0.0), poll_seconds=0, limit=None)
+        self.assertEqual(load_json(path)["status"], "complete")
+        self.assertEqual(len(h.all_records("retry1")), 3)
+
+    def test_haiku_long_prompt_rate(self):
+        from synthlit.models import cost_usd
+        self.assertAlmostEqual(cost_usd("claude-haiku-5-5", 100_000, 1000, batch=False), (100_000 * 0.10 + 1000 * 0.50) / 1e6)
+        self.assertAlmostEqual(cost_usd("claude-haiku-5-5", 100_001, 1000, batch=True), (100_001 * 0.50 + 1000 * 2.50) / 1e6 / 2)
+
     def test_budget_stops_new_turns(self):
         with contextlib.redirect_stdout(io.StringIO()):
             p = h.plan("budget1", "t", [parse_subject("fake-ideal@low")], 1, stage2=True, max_tokens=1000)

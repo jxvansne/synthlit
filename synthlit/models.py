@@ -20,6 +20,9 @@ PRICES = {
     "claude-sonnet-5": (2.00, 10.00),
     "claude-haiku-5-5": (0.10, 0.50),
 }
+# Haiku 5.5 has a second rate card for long prompts: both rates rise when the input exceeds
+# the threshold (a Stage 2 request resends the Stage 1 thinking, which can cross it).
+LONG_PROMPT_PRICES = {"claude-haiku-5-5": (100_000, 0.50, 2.50)}   # (input tokens over which, input, output)
 PRICES_AS_OF = "2026-10-06"
 BATCH_DISCOUNT = 0.5
 EFFORTS = ("low", "medium", "high", "xhigh", "max")
@@ -72,5 +75,7 @@ def cost_usd(model: str, input_tokens: int, output_tokens: int, batch: bool) -> 
     if model not in PRICES:
         return 0.0
     pin, pout = PRICES[model]
+    if model in LONG_PROMPT_PRICES and input_tokens > LONG_PROMPT_PRICES[model][0]:
+        _, pin, pout = LONG_PROMPT_PRICES[model]
     c = (input_tokens * pin + output_tokens * pout) / 1e6
     return c * BATCH_DISCOUNT if batch else c
